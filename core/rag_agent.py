@@ -2,12 +2,28 @@
 
 from __future__ import annotations
 
-from typing import Any
-
+import asyncio
+import json
+import os
 import random
+import re
 import threading
+import time
+from html import unescape
+from typing import Any
+from urllib.parse import parse_qs, unquote, urlparse
 
-from core.zero_trace_rag import PrivacyError, SearchResult, ZeroTraceRAG, search_brave_api
+from core.providers import get_llm_client
+from core.vault import get_secret
+from core.zero_trace_rag import (
+    DEFAULT_SEARCH_INSTANCE_ATTEMPTS,
+    MAX_WEB_RESULTS_POOL_FACTOR,
+    PrivacyError,
+    SearchResult,
+    ZeroTraceRAG,
+    search_brave_api,
+)
+from utils.helpers import diversify_results, sanitize_query_for_antibot, split_and_sanitize_queries
 
 WEB_AGENT_SYSTEM_PROMPT = (
     "You are an OSINT specialist. Analyze the user request and produce a SINGLE technical search query in ENGLISH. "
@@ -42,6 +58,116 @@ THINKING_SYSTEM_PROMPT = (
     "Then provide the final answer outside the block. "
     "When responding to the user, use the same language the user used."
 )
+
+RESEARCH_MAX_ITERATIONS = int(os.getenv("RESEARCH_MAX_ITERATIONS", "3"))
+
+
+def run_coro(coro):
+    """Run one coroutine in an isolated event loop."""
+    loop = asyncio.new_event_loop()
+    try:
+        return loop.run_until_complete(coro)
+    finally:
+        loop.run_until_complete(loop.shutdown_asyncgens())
+        loop.close()
+
+
+def strip_html(text: str) -> str:
+    """Remove HTML tags and normalize whitespace."""
+    no_tags = re.sub(r"<[^>]+>", " ", text or "")
+    return " ".join(unescape(no_tags).split())
+
+
+def parse_duckduckgo_redirect(url: str) -> str:
+    """Resolve DuckDuckGo redirect wrapper URLs to final destinations."""
+    parsed = urlparse(url)
+    if parsed.hostname and "duckduckgo.com" in parsed.hostname and parsed.path.startswith("/l/"):
+        uddg = parse_qs(parsed.query).get("uddg", [""])[0]
+        return unquote(uddg) if uddg else ""
+    return url
+
+
+def get_max_instance_attempts() -> int:
+    """Clamp max SearXNG attempts from environment."""
+    raw = os.getenv("SEARX_MAX_INSTANCE_ATTEMPTS", str(DEFAULT_SEARCH_INSTANCE_ATTEMPTS))
+    try:
+        value = int(raw)
+    except ValueError:
+        value = DEFAULT_SEARCH_INSTANCE_ATTEMPTS
+    return max(1, min(value, 12))
+
+
+def _normalize_instance_list(searx_instances: list[str]) -> list[str]:
+    normalized: list[str] = []
+    for item in searx_instances:
+        clean = str(item or "").strip().rstrip("/")
+        if clean:
+            normalized.append(clean)
+    return sorted(set(normalized))
+
+
+def build_search_cache_key(
+    *,
+    query: str,
+    web_mode: str,
+    preferred_engine: str,
+    top_k: int,
+    searx_instances: list[str],
+) -> str:
+    """Build a deterministic cache key for search results."""
+    sanitized_query, _ = ZeroTraceRAG._sanitize_web_query(query)
+    payload = {
+        "q": " ".join(sanitized_query.lower().split()),
+        "mode": str(web_mode),
+        "engine": str(preferred_engine),
+        "top_k": int(top_k),
+        "instances": _normalize_instance_list(searx_instances),
+    }
+    return json.dumps(payload, ensure_ascii=True, sort_keys=True)
+
+
+def record_search_cache_event(*, hit: bool) -> None:
+    """Runtime-injected cache metrics hook (no-op fallback)."""
+    _ = hit
+
+
+def get_cached_search_results(cache_key: str) -> list[SearchResult] | None:
+    """Runtime-injected cache read hook (fallback disables cache)."""
+    _ = cache_key
+    return None
+
+
+def put_cached_search_results(cache_key: str, results: list[SearchResult]) -> None:
+    """Runtime-injected cache write hook (no-op fallback)."""
+    _ = (cache_key, results)
+
+
+def create_rag(*args: Any, **kwargs: Any) -> ZeroTraceRAG:
+    """Runtime dependency populated by app runtime."""
+    raise RuntimeError("create_rag is runtime-injected. Use run_research_with_runtime().")
+
+
+def search_web_direct(*args: Any, **kwargs: Any) -> list[SearchResult]:
+    """Runtime dependency populated by app runtime."""
+    raise RuntimeError("search_web_direct is runtime-injected. Use run_research_with_runtime().")
+
+
+def build_rag_messages(*args: Any, **kwargs: Any) -> list[dict]:
+    """Runtime dependency populated by app runtime."""
+    raise RuntimeError("build_rag_messages is runtime-injected. Use run_research_with_runtime().")
+
+
+def build_direct_messages(*args: Any, **kwargs: Any) -> list[dict]:
+    """Runtime dependency populated by app runtime."""
+    raise RuntimeError("build_direct_messages is runtime-injected. Use run_research_with_runtime().")
+
+
+def close_rag_safely(rag: ZeroTraceRAG) -> None:
+    """Close RAG resources without propagating cleanup failures."""
+    try:
+        run_coro(rag.close())
+    except Exception:
+        pass
 
 def run_research_with_runtime(runtime: dict[str, Any], **kwargs):
     """Run iterative research using runtime-injected dependencies from the app layer."""
