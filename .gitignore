@@ -1,0 +1,19 @@
+# Entornos virtuales (No subir el peso de las librerias)
+venv/
+.venv/
+env/
+
+# Cache de Python
+__pycache__/
+*.pyc
+core/__pycache__/
+ui/__pycache__/
+utils/__pycache__/
+
+# Secretos y credenciales (CRITICO)
+.env
+.secrets/
+
+# Bases de datos y archivos locales
+conversations_json/
+.streamlit/

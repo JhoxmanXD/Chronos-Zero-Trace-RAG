@@ -1,0 +1,105 @@
+Chronos Source-Available License v2.0 (Bilingual)
+Copyright (c) 2026 Chronos Contributors
+
+==================================================
+ENGLISH VERSION
+==================================================
+
+1. Scope
+This license applies to the Chronos source code, documentation, and related files included in this repository (the "Software").
+
+2. Non-Commercial License Grant
+Subject to compliance with this license, you are granted a worldwide, non-exclusive, non-transferable, revocable, royalty-free license to use, copy, modify, and distribute the Software for Non-Commercial Use only.
+
+3. Definitions
+"Non-Commercial Use" means use that does not generate, and is not intended to generate, direct or indirect commercial revenue, fees, subscriptions, paid services, consulting income, or any other commercial advantage.
+"Commercial Use" means any use that is not Non-Commercial Use.
+
+4. Commercial Use and Royalty Requirement
+Commercial Use of the Software is prohibited unless you first obtain a separate written commercial license from the copyright holder.
+Any Commercial Use requires a royalty agreement executed before such use begins.
+
+Commercial licensing contact:
+jhoxmanvalenzuela06@gmail.com
+
+When requesting commercial terms, include:
+- Legal entity name
+- Intended use case
+- Revenue model
+- Estimated monthly or annual volume
+
+5. Conditions for Redistribution
+If you distribute the Software (original or modified), you must:
+- Keep this license text and all copyright notices.
+- Clearly identify material modifications.
+- Preserve attribution to the original project and maintainers.
+
+6. Restrictions
+This license does not grant permission for Commercial Use without a separate agreement.
+This license does not grant any patent rights except as required by applicable law.
+This license does not grant rights to project names, logos, or trademarks except for reasonable and accurate attribution.
+
+7. Term and Termination
+Any breach of this license automatically terminates your rights under this license.
+Upon termination, you must cease all use and distribution of the Software unless and until rights are reinstated in writing by the copyright holder.
+
+8. Disclaimer of Warranty
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT.
+
+9. Limitation of Liability
+TO THE MAXIMUM EXTENT PERMITTED BY LAW, IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN CONTRACT, TORT, OR OTHERWISE, ARISING FROM OR RELATED TO THE SOFTWARE OR ITS USE.
+
+10. Entire Agreement for Commercial Terms
+Any commercial rights, royalties, reporting obligations, and payment terms must be defined in a separate signed written agreement.
+
+
+==================================================
+VERSION EN ESPANOL
+==================================================
+
+1. Alcance
+Esta licencia aplica al codigo fuente de Chronos, su documentacion y archivos relacionados incluidos en este repositorio (el "Software").
+
+2. Licencia para Uso No Comercial
+Sujeto al cumplimiento de esta licencia, se concede una licencia mundial, no exclusiva, intransferible, revocable y libre de regalias para usar, copiar, modificar y distribuir el Software unicamente para Uso No Comercial.
+
+3. Definiciones
+"Uso No Comercial" significa un uso que no genera, ni esta destinado a generar, ingresos comerciales directos o indirectos, tarifas, suscripciones, servicios pagados, ingresos por consultoria, ni otra ventaja comercial.
+"Uso Comercial" significa cualquier uso que no sea Uso No Comercial.
+
+4. Uso Comercial y Requisito de Regalias
+El Uso Comercial del Software esta prohibido salvo que primero se obtenga una licencia comercial separada y por escrito del titular de los derechos.
+Cualquier Uso Comercial requiere un acuerdo de regalias firmado antes del inicio de dicho uso.
+
+Contacto comercial:
+jhoxmanvalenzuela06@gmail.com
+
+Al solicitar terminos comerciales, incluir:
+- Nombre de la entidad legal
+- Caso de uso previsto
+- Modelo de ingresos
+- Volumen estimado mensual o anual
+
+5. Condiciones de Redistribucion
+Si distribuyes el Software (original o modificado), debes:
+- Mantener este texto de licencia y todos los avisos de derechos de autor.
+- Identificar claramente las modificaciones sustanciales.
+- Mantener la atribucion al proyecto original y a sus mantenedores.
+
+6. Restricciones
+Esta licencia no autoriza el Uso Comercial sin acuerdo separado.
+Esta licencia no concede derechos de patente, salvo lo exigido por la ley aplicable.
+Esta licencia no concede derechos sobre nombres del proyecto, logotipos o marcas, salvo para atribucion razonable y precisa.
+
+7. Vigencia y Terminacion
+Cualquier incumplimiento de esta licencia termina automaticamente los derechos otorgados por esta licencia.
+Tras la terminacion, debes cesar todo uso y distribucion del Software, salvo que los derechos sean restablecidos por escrito por el titular de los derechos.
+
+8. Exclusion de Garantias
+EL SOFTWARE SE ENTREGA "TAL CUAL", SIN GARANTIAS DE NINGUN TIPO, EXPRESAS O IMPLICITAS, INCLUYENDO, SIN LIMITACION, GARANTIAS DE COMERCIABILIDAD, IDONEIDAD PARA UN PROPOSITO PARTICULAR, TITULO Y NO INFRACCION.
+
+9. Limitacion de Responsabilidad
+EN LA MAXIMA MEDIDA PERMITIDA POR LA LEY, EN NINGUN CASO LOS AUTORES O TITULARES DE DERECHOS SERAN RESPONSABLES POR RECLAMACIONES, DANOS U OTRAS RESPONSABILIDADES, YA SEA POR CONTRATO, AGRAVIO O CUALQUIER OTRA TEORIA, DERIVADAS O RELACIONADAS CON EL SOFTWARE O SU USO.
+
+10. Acuerdo Completo para Terminos Comerciales
+Cualquier derecho comercial, regalias, obligaciones de reporte y condiciones de pago deben definirse en un acuerdo separado, firmado por las partes.

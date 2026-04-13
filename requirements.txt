@@ -1,0 +1,6 @@
+streamlit==1.56.0
+openai==2.31.0
+requests[socks]==2.33.1
+urllib3==2.6.3
+cryptography==46.0.7
+PySocks==1.7.1

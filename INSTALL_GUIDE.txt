@@ -1,0 +1,89 @@
+INSTALL GUIDE - CHRONOS (BILINGUAL)
+==================================
+
+SECTION 1 - ENGLISH
+===================
+
+1) Install Python
+- Download Python 3.10+ from: https://www.python.org/downloads/
+- During installation, enable: "Add Python to PATH".
+- Verify installation in terminal:
+  python --version
+
+2) Open the project folder
+- In terminal, move into the Chronos directory:
+  cd "path\to\Chronos"
+
+3) (Recommended) Create and activate a virtual environment
+- Create venv:
+  python -m venv .venv
+- Activate on Windows PowerShell:
+  .\.venv\Scripts\Activate.ps1
+
+4) Install dependencies
+- Run:
+  pip install -r requirements.txt
+
+5) Make sure Tor daemon is running
+- Install Tor Browser or Tor service.
+- Confirm SOCKS port is available on either 9050 or 9150.
+- Chronos uses Tor through socks5h://127.0.0.1:9050 (or 9150).
+
+6) Run Chronos
+- Start app:
+  streamlit run app.py
+
+7) First run behavior
+- On first startup, Chronos creates the .secrets directory automatically.
+- This encrypted local vault stores API keys and provider secrets.
+
+Troubleshooting quick tips
+- If PowerShell blocks script activation, run:
+  Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+- If Tor validation fails, verify port 9050/9150 and firewall/proxy settings.
+- If pip is not found, try:
+  python -m pip install -r requirements.txt
+
+
+SECTION 2 - ESPANOL
+===================
+
+1) Instalar Python
+- Descarga Python 3.10+ desde: https://www.python.org/downloads/
+- Durante la instalacion, activa: "Add Python to PATH".
+- Verifica en terminal:
+  python --version
+
+2) Abrir la carpeta del proyecto
+- En terminal, entra al directorio de Chronos:
+  cd "ruta\a\Chronos"
+
+3) (Recomendado) Crear y activar entorno virtual
+- Crear venv:
+  python -m venv .venv
+- Activar en PowerShell de Windows:
+  .\.venv\Scripts\Activate.ps1
+
+4) Instalar dependencias
+- Ejecuta:
+  pip install -r requirements.txt
+
+5) Asegurar que el daemon de Tor este activo
+- Instala Tor Browser o servicio Tor.
+- Confirma que el puerto SOCKS este disponible en 9050 o 9150.
+- Chronos usa Tor mediante socks5h://127.0.0.1:9050 (o 9150).
+
+6) Ejecutar Chronos
+- Inicia la app:
+  streamlit run app.py
+
+7) Comportamiento del primer inicio
+- En el primer arranque, Chronos crea automaticamente el directorio .secrets.
+- Este vault local cifrado guarda API keys y secretos de proveedores.
+
+Consejos rapidos de solucion de problemas
+- Si PowerShell bloquea la activacion de scripts, ejecuta:
+  Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+- Si falla la validacion de Tor, revisa puerto 9050/9150 y firewall/proxy.
+- Si pip no se encuentra, prueba:
+  python -m pip install -r requirements.txt
