@@ -678,9 +678,11 @@ def run_iterative_research(
                 )
 
                 # Anti-bot pacing to avoid burst behavior that often triggers HTTP 403.
-                sleep_seconds = random.uniform(1.5, 3.5)
-                log(f"[Research] Anti-bot delay applied: {sleep_seconds:.2f}s")
-                interruptible_sleep(sleep_seconds, stop_event)
+                # Skip delay for Brave API as it uses authenticated requests.
+                if web_mode != "brave":
+                    sleep_seconds = random.uniform(1.5, 3.5)
+                    log(f"[Research] Anti-bot delay applied: {sleep_seconds:.2f}s")
+                    interruptible_sleep(sleep_seconds, stop_event)
 
             if not had_successful_query and not aggregated_sources:
                 log("[Research] No query returned results in this iteration.")
