@@ -3,12 +3,12 @@
 
 from __future__ import annotations
 
-from app_runtime import main as runtime_main
+import app_runtime
 
 
 def main() -> None:
     """Run the application runtime."""
-    runtime_main()
+    app_runtime.main()
 
 
 if __name__ == "__main__":
